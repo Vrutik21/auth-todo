@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useEffect } from "react";
+import Signup from "./components/signup/signup";
+import { Route, Routes } from "react-router-dom";
+import Login from "./components/login/login";
+import NavBar from "./components/navBar/NavBar";
+import { Container } from "@mui/material";
+import Todos from "./components/todos/Todos";
+import { useDispatch } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { loadUser } from "./store/actions/authActions";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ToastContainer />
+      <Container maxWidth="lg">
+        <NavBar />
+        <Container style={{ margin: "30px auto" }} maxWidth="md">
+          <Routes>
+            {/* {user && <Route path="/" exact element={<Todo />} />} */}
+
+            <Route path="/" exact element={<Todos />} />
+            <Route path="/signup" exact element={<Signup />} />
+            <Route path="/login" exact element={<Login />} />
+            {/* <Route path="/" exact element={<Navigate replace to="/login" />} />s */}
+          </Routes>
+        </Container>
+      </Container>
+    </>
   );
 }
 
