@@ -24,7 +24,7 @@ import { signOut } from "../../store/actions/authActions";
 const NavBar = () => {
   const state = useSelector((state) => state);
   const auth = useSelector((state) => state.auth);
-  console.log(state);
+  // console.log(state);
 
   const dispatch = useDispatch();
 
